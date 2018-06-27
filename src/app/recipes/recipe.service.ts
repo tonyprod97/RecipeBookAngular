@@ -5,6 +5,7 @@ import { Recipe } from './recipe.model';
 
 @Injectable()
 export class RecipeService {
+
   private recipes: Recipe[] = [
     new Recipe('Burger','croatian burger beef',
     'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Umami_Burger_hamburger.jpg/220px-Umami_Burger_hamburger.jpg',
@@ -16,11 +17,15 @@ export class RecipeService {
 
   constructor(private slService: ShoppingListService){}
 
-  getRecipes(){
+  getRecipes() {
     return this.recipes.slice(); // create copy of private array
   }
 
-  addToShoppingList(ingredients: Ingredient[]){
+  addToShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredients(ingredients);
+  }
+
+  getRecipeByIndex(index: number) {
+    return this.recipes[index];
   }
 }
