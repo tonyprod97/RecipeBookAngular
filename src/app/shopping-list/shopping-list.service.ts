@@ -1,28 +1,42 @@
 import { EventEmitter } from '@angular/core';
 import { Ingredient } from './../../shared/ingredient.model';
+import { Subject } from 'rxjs';
 
 export class ShoppingListService {
 
   private ingredients: Ingredient[] = [];
-  createIngredients: EventEmitter<Ingredient[]>= new EventEmitter
+  createIngredients = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   constructor() {
-    this.ingredients.push(new Ingredient('Butter',2),
-                      new Ingredient('bread slice',1));
+    this.ingredients.push(new Ingredient('Butter', 2),
+                      new Ingredient('bread slice', 1));
   }
 
-  addIngredient(ingredient: Ingredient){
+  addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.createIngredients.emit(this.ingredients.slice());
+    this.createIngredients.next(this.ingredients.slice());
   }
 
-  addIngredients(ingredients: Ingredient[]){
+  addIngredients(ingredients: Ingredient[]) {
     this.ingredients.push(...ingredients);
-    this.createIngredients.emit(this.ingredients.slice());
+    this.createIngredients.next(this.ingredients.slice());
+  }
+  updateIngredient(index: number, ingredient: Ingredient) {
+    this.ingredients[index] = ingredient;
+    this.createIngredients.next(this.ingredients);
   }
 
-  getIngredients(){
+  getIngredients() {
     return this.ingredients.slice(); // make a copy of private array
+  }
+
+  getIngredient(index: number) {
+    return this.ingredients[index];
+  }
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
+    this.createIngredients.next(this.ingredients);
   }
 
 }
