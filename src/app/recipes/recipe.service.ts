@@ -1,6 +1,6 @@
 import { Ingredient } from './../../shared/ingredient.model';
 import { ShoppingListService } from './../shopping-list/shopping-list.service';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Subject } from 'rxjs';
 
@@ -42,4 +42,9 @@ export class RecipeService {
   getRecipeByIndex(index: number) {
     return this.recipes[index];
   }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  } 
 }
