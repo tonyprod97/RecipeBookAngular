@@ -4,6 +4,8 @@ import { Http } from '@angular/http';
 import { Response } from '@angular/http';
 import { Recipe } from '../app/recipes/recipe.model';
 import '../../node_modules/rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+
 
 
 @Injectable()

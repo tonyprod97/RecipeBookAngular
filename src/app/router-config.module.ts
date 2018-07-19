@@ -1,3 +1,4 @@
+import { SignupComponent } from './auth/signup/signup.component';
 import { RecipeSelectStartComponent } from './recipes/recipe-select-start/recipe-select-start.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
     { path: ':id' , component: RecipeDetailComponent},
     { path: ':id/edit', component: RecipeEditComponent}
   ]},
-  { path: '', redirectTo: '/recipes', pathMatch: 'full'}
+  { path: '', redirectTo: '/recipes', pathMatch: 'full'},
+  { path: 'signup', component: SignupComponent }
 ];
 
 @NgModule({
